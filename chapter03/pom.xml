@@ -14,8 +14,8 @@
 	
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-		<maven.compliler.source>21</maven.compliler.source>
-		<maven.compliler.target>21</maven.compliler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 
 	<dependencies>
