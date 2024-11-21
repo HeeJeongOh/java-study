@@ -9,5 +9,13 @@ public class PaintApp {
 		point.setY(20);
 		
 		point.show();
+		
+		Point point2 = new Point(100, 200);
+		
+		point2.show();
+		
+		point2.disappear();
+		point2.show(false);
+		
 	}
 }
