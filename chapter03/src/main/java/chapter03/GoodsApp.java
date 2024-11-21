@@ -18,6 +18,14 @@ public class GoodsApp {
 //				+ ", 재고량: " + goods.countStock);
 		
 		goods.printInfo();
+		System.out.println(Goods.countOfGoods);
+
+		Goods goods2 = new Goods();
+		Goods goods3 = new Goods();
+		
+		System.out.println(Goods.countOfGoods);
+
+	
 	}
 
 }

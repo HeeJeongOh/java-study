@@ -1,11 +1,18 @@
 package chapter03;
 
 public class Goods {
+	
+	public static int countOfGoods = 0;
 
 	private String name;
 	private int price;
 	private int countSold;
 	private int countStock;
+	
+	public Goods() {
+		// == Goods.countOfGoods++ 
+		countOfGoods++;
+	}
 
 	public String getName() {
 		return name;
