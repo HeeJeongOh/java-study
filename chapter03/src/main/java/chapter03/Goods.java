@@ -54,5 +54,9 @@ public class Goods {
 				+ ", 판매량: " + this.countSold
 				+ ", 재고량: " + this.countStock);
 	}
+	
+	public int calcDiscountPrice(float discountRate) {
+		return (int) (this.price * (1 - discountRate));
+	}
 
 }

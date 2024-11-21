@@ -19,12 +19,18 @@ public class GoodsApp {
 		
 		goods.printInfo();
 		System.out.println(Goods.countOfGoods);
-
+		
+		// 정보 은닉 
+		// goods.price = -1000; (x)
+		// setPrice 내부 검열 
+		// goods.setPrice(-1000);
+		
 		Goods goods2 = new Goods();
 		Goods goods3 = new Goods();
 		
 		System.out.println(Goods.countOfGoods);
-
+		
+		System.out.println(goods.calcDiscountPrice(0.5f));
 	
 	}
 
