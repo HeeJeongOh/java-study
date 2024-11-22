@@ -1,4 +1,10 @@
-package paint;
+package com.poscodx.paint.main;
+
+import com.poscodx.paint.i.Drawable;
+import com.poscodx.paint.point.ColorPoint;
+import com.poscodx.paint.point.Point;
+import com.poscodx.paint.shape.*;
+import com.poscodx.paint.text.GraphicText;
 
 public class PaintApp {
 	public static void main(String[] args) {
