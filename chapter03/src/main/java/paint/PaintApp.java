@@ -30,6 +30,15 @@ public class PaintApp {
 		
 		ColorPoint point4 = new ColorPoint(50, 100, "yellow");
 		point4.show();
+		
+
+//		drawTriangle(new Triangle());
+//		drawRectangle(new Rectangle());
+		
+		drawShape(new Triangle());
+		drawShape(new Rectangle());
+		drawShape(new Circle());
+		
 	}
 	
 	public static void drawPoint(Point point) {
@@ -40,4 +49,15 @@ public class PaintApp {
 //		colorPoint.show();
 //	}
 	
+	public static void drawShape(Shape shape) {
+		shape.draw();
+	}
+
+//	public static void drawTriangle(Triangle triangle) {
+//		triangle.draw();
+//	}
+//	
+//	public static void drawRectangle(Rectangle rectangle) {
+//		rectangle.draw();
+//	}
 }
