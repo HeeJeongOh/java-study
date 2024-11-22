@@ -26,8 +26,11 @@ public class ColorPoint extends Point {
 		
 		// private으로 되어있기에, x,y 오류 -> protected or getter	
 		System.out.format("Point[x=%d, y=%d, color=%s]를 그렸습니다.\n", this.getX(), this.getY(), this.color);
-
-		
 	}
-
+	
+	@Override
+	public void draw() {
+		// super.draw();
+		show();
+	}
 }

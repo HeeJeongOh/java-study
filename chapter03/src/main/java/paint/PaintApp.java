@@ -8,13 +8,15 @@ public class PaintApp {
 		point1.setY(20);
 		
 //		point1.show();
-		drawPoint(point1);
-		
+//		drawPoint(point1);
+		draw(point1);
 		
 		Point point2 = new Point(100, 200);
 		
 //		point2.show(true);
-		drawPoint(point2);
+//		drawPoint(point2);
+		draw(point2);
+		
 //		point2.disappear();
 		point2.show(false);
 		
@@ -29,29 +31,40 @@ public class PaintApp {
 		
 		
 		ColorPoint point4 = new ColorPoint(50, 100, "yellow");
-		point4.show();
+//		point4.show();
+		draw(point4);
 		
 
 //		drawTriangle(new Triangle());
 //		drawRectangle(new Rectangle());
 		
-		drawShape(new Triangle());
-		drawShape(new Rectangle());
-		drawShape(new Circle());
+//		drawShape(new Triangle());
+//		drawShape(new Rectangle());
+//		drawShape(new Circle());
 		
+		
+		draw(new Triangle());
+		draw(new Rectangle());
+		draw(new Circle());
+		
+		draw(new GraphicText("안녕"));
 	}
 	
-	public static void drawPoint(Point point) {
-		point.show();
-	}	
+	public static void draw(Drawable drawable) {
+		drawable.draw();
+	}
+	
+//	public static void drawPoint(Point point) {
+//		point.show();
+//	}	
 	
 //	public static void drawColorPoint(ColorPoint colorPoint) {
 //		colorPoint.show();
 //	}
 	
-	public static void drawShape(Shape shape) {
-		shape.draw();
-	}
+//	public static void drawShape(Shape shape) {
+//		shape.draw();
+//	}
 
 //	public static void drawTriangle(Triangle triangle) {
 //		triangle.draw();
