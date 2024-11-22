@@ -14,6 +14,14 @@ public class Point {
 		this.y = y;
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -27,7 +35,7 @@ public class Point {
 	}
 
 	public void show(boolean visible) {
-		if(visible == true) {
+		if(visible) {
 			show();
 		}
 		else {
