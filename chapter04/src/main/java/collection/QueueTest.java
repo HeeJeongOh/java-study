@@ -16,6 +16,18 @@ public class QueueTest {
 			System.out.println(s);
 		}
 
+		// 비어있는 경우, null을 반환
+		System.out.println(q.poll());
+
+		System.out.println("===========");
+
+		q.offer("둘리");
+		q.offer("마이콜");
+		q.offer("도우너");
+
+		System.out.println(q.poll());
+		System.out.println(q.peek());
+
 	}
 
 }
