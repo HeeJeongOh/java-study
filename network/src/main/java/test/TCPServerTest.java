@@ -1,7 +1,6 @@
 package test;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.*;
 
 public class TCPServerTest {
@@ -25,24 +24,34 @@ public class TCPServerTest {
 
 			// 4. Java::IO Stream 받아오기
 			InputStream is = socket.getInputStream();
+			OutputStream os = socket.getOutputStream();
 
-			// 5. 데이터 읽기 - inputStreamReader로도 가능
-			byte[] buffer = new byte[256];
+			while (true) {
 
-			// 5.1 blocking
-			int readByteCount = is.read(buffer); // socket io exception과 별도로 io exception 발생
+				// 5. 데이터 읽기 - inputStreamReader로도 가능
+				byte[] buffer = new byte[256];
+				// 5.1 blocking
+				int readByteCount = is.read(buffer); // socket io exception과 별도로 io exception 발생
 
-			// 5.2 파일 끝 => 클라이언트가 소켓 닫음
-			if (readByteCount == -1) {
-				System.out.println("[server] closeod by client");
-				return;
+				// 5.2 파일 끝 => 클라이언트가 소켓 닫음
+				if (readByteCount == -1) {
+					System.out.println("[server] closeod by client");
+					return;
+				}
+
+				// 5.3 데이터 확인
+				// 시작(offset) - 끝(readByteCount)
+				String data = new String(buffer, 0, readByteCount, "utf-8");
+				System.out.println("[server] receive: " + data);
+
+				// 6. 데이터 쓰기
+				os.write(data.getBytes("utf-8"));
+
 			}
 
-			// 5.3 데이터 확인
-			// 시작(offset) - 끝(readByteCount)
-			String data = new String(buffer, 0, readByteCount, "utf-8");
-			System.out.println("[server] receive: " + data);
-
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			System.out.println("[server1] Socket Exception : " + e);
 		} catch (IOException e) {
 			System.out.println("[server] error : " + e);
 		} finally {
