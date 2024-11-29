@@ -14,7 +14,7 @@ public class TCPClientTest {
 
 		try {
 			// 2. 서버 연결
-			socket.connect(new InetSocketAddress("192.68.0211", 60000));
+			socket.connect(new InetSocketAddress("192.68.0.4", 60000));
 
 			// 3. IO Stream 받아오기
 			InputStream is = socket.getInputStream();

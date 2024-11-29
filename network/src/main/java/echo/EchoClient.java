@@ -5,7 +5,7 @@ import java.net.*;
 import java.util.Scanner;
 
 public class EchoClient {
-	private static final String SERVER_IP = "192.168.0.211";
+	private static final String SERVER_IP = "192.168.0.4";
 
 	public static void main(String[] args) {
 
@@ -17,10 +17,8 @@ public class EchoClient {
 			// 1. 소켓 생성
 			socket = new Socket();
 
-			socket.connect(new InetSocketAddress(SERVER_IP, EchoServer.PORT));
-
 			// 2. 서버 연결
-			socket.connect(new InetSocketAddress(SERVER_IP, 60000));
+			socket.connect(new InetSocketAddress(SERVER_IP, EchoServer.PORT));
 
 			// 3. IO Stream 받아오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
