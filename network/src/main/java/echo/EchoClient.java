@@ -2,41 +2,48 @@ package echo;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class EchoClient {
 	private static final String SERVER_IP = "192.168.0.211";
 
 	public static void main(String[] args) {
 
+		Scanner scanner = null;
 		Socket socket = null;
 
 		try {
+			scanner = new Scanner(System.in, "utf-8");
 			// 1. 소켓 생성
 			socket = new Socket();
 
 			socket.connect(new InetSocketAddress(SERVER_IP, EchoServer.PORT));
 
 			// 2. 서버 연결
-			socket.connect(new InetSocketAddress("192.68.0211", 60000));
+			socket.connect(new InetSocketAddress(SERVER_IP, 60000));
 
 			// 3. IO Stream 받아오기
-			InputStream is = socket.getInputStream();
-			OutputStream os = socket.getOutputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"), true);
 
-			// 4. 쓰기
-			String data = "Hello World";
-			os.write(data.getBytes("utf-8"));
+			// 4. 쓰기 & 읽기
+			while (true) {
+				System.out.print(">> ");
+				String line = scanner.nextLine();
 
-			// 5. 읽기
-			byte[] buffer = new byte[256];
-			int readByteCount = is.read(buffer);
-			if (readByteCount == -1) {
-				log("closed by server");
-				return;
+				if ("exit".equals(line)) {
+					break;
+				}
+
+				pw.println(line);
+
+				String data = br.readLine();
+				if (data == null) {
+					log("closed by server");
+					break;
+				}
+				System.out.println("<< " + data);
 			}
-
-			data = new String(buffer, 0, readByteCount, "utf-8");
-			log("received : " + data);
 
 		} catch (SocketException e) {
 			log("SocketException : " + e);
@@ -46,6 +53,9 @@ public class EchoClient {
 			log("error : " + e);
 		} finally {
 			try {
+				if (scanner != null) {
+					scanner.close();
+				}
 				if (socket != null && !socket.isClosed()) {
 					socket.close();
 				}
