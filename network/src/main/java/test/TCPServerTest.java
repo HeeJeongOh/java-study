@@ -14,9 +14,12 @@ public class TCPServerTest {
 			// 1. 소켓 객체 생성
 			serverSocket = new ServerSocket();
 
+			// 1-1. FIN_WAIT -> TIME_WAIT 상태에서도 소켓의 포트 할당이 가능하도록 하는 옵션 
+			serverSocket.setReuseAddress(true);
+
 			// 2. 소켓 주소(접근 가능한 IP 주소 + 포트) 바인딩
 			// InetSocketAddress("0.0.0.0", __ ) = 모두 허용
-			serverSocket.bind(new InetSocketAddress("0.0.0.0", 50000));
+			serverSocket.bind(new InetSocketAddress("0.0.0.0", 60022));
 
 			// 3. blocking 실행, 통신 요청 기다리는 중
 			Socket socket = serverSocket.accept();
@@ -35,7 +38,7 @@ public class TCPServerTest {
 
 				// 5.2 파일 끝 => 클라이언트가 소켓 닫음
 				if (readByteCount == -1) {
-					System.out.println("[server] closeod by client");
+					System.out.println("[server] closed by client");
 					return;
 				}
 
@@ -43,6 +46,13 @@ public class TCPServerTest {
 				// 시작(offset) - 끝(readByteCount)
 				String data = new String(buffer, 0, readByteCount, "utf-8");
 				System.out.println("[server] receive: " + data);
+
+				// SO_TIMEOUT Test
+				//				try {
+				//					Thread.sleep(3000);
+				//				} catch (InterruptedException e) {
+				//					e.printStackTrace();
+				//				}
 
 				// 6. 데이터 쓰기
 				os.write(data.getBytes("utf-8"));
