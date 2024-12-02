@@ -33,6 +33,7 @@ public class ChatServerThread extends Thread {
 			// 3. 요청 처리
 			while (true) {
 				String request = br.readLine();
+				System.out.println("raw request: " + request);
 
 				if (request == null) {
 					ChatServer.log("클라이언트로부터 연결 중단 " + request);
@@ -52,6 +53,7 @@ public class ChatServerThread extends Thread {
 
 				} else if ("QUIT".equals(tokens[0])) {
 					doQuit(pw);
+					break;
 
 				} else {
 					ChatServer.log("error: 알 수 없는 요청 (" + tokens[0] + ")");
@@ -60,6 +62,7 @@ public class ChatServerThread extends Thread {
 
 		} catch (IOException e) {
 			ChatServer.log("error: " + e);
+			e.printStackTrace();
 		} finally {
 			try {
 
@@ -91,7 +94,6 @@ public class ChatServerThread extends Thread {
 
 		// 클라이언트 측에 성공 소식 전달
 		writer.println("QUIT SUCCESS");
-		writer.flush();
 
 		broadcast(data, true);
 
@@ -122,7 +124,6 @@ public class ChatServerThread extends Thread {
 
 		// 클라이언트 측에 성공 소식 전달
 		writer.println("JOIN SUCCESS");
-		writer.flush();
 
 	}
 
@@ -141,7 +142,6 @@ public class ChatServerThread extends Thread {
 			for (Writer writer : listWriters) {
 				PrintWriter pw = (PrintWriter) writer;
 				pw.println(nickname + ":" + data);
-				pw.flush();
 			}
 
 		}
@@ -157,7 +157,6 @@ public class ChatServerThread extends Thread {
 				for (Writer writer : listWriters) {
 					PrintWriter pw = (PrintWriter) writer;
 					pw.println(data);
-					pw.flush();
 				}
 
 			}
